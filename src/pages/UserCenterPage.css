@@ -1,0 +1,333 @@
+.user-center-page {
+  padding: 20px 0;
+}
+
+.user-center-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.user-center-page h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+.user-center-content {
+  display: flex;
+  gap: 20px;
+}
+
+/* 侧边导航 */
+.sidebar {
+  width: 200px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-tabs li {
+  padding: 12px 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #555;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-tabs li:hover {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+.nav-tabs li.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.unread-badge {
+  background-color: #dc3545;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+/* 主内容区 */
+.main-content {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 用户信息 */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+}
+
+.info-label {
+  width: 120px;
+  font-weight: 600;
+  color: #555;
+}
+
+.info-value {
+  color: #333;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+.password-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.password-btn:hover {
+  background-color: #5a6268;
+}
+
+/* 捐赠记录和需求记录 */
+.donations-section,
+.demands-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.donations-list,
+.demands-list {
+  overflow-x: auto;
+}
+
+.donations-list table,
+.demands-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.donations-list th,
+.donations-list td,
+.demands-list th,
+.demands-list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.donations-list th,
+.demands-list th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+}
+
+.donations-list tr:hover,
+.demands-list tr:hover {
+  background-color: #f8f9fa;
+}
+
+.view-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+}
+
+.view-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 消息通知 */
+.notifications-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.notification-item {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.notification-item:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item.unread {
+  background-color: #e3f2fd;
+  border-left: 4px solid #2196f3;
+}
+
+.notification-item.read {
+  background-color: #f8f9fa;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notification-title {
+  font-weight: 600;
+  color: #333;
+}
+
+.notification-time {
+  font-size: 14px;
+  color: #666;
+}
+
+.notification-content {
+  color: #555;
+  line-height: 1.5;
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .user-center-content {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+  }
+  
+  .nav-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+  }
+  
+  .nav-tabs li {
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .info-label {
+    margin-bottom: 5px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+/* 状态标签样式 */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.pending {
+  background-color: #ffc107;
+  color: #856404;
+}
+
+.status-badge.matched {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.status-badge.delivered {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-badge.canceled {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* 筛选选择器样式 */
+.filter-select {
+  padding: 6px 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}

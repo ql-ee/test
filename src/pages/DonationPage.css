@@ -1,0 +1,78 @@
+.donation-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.donation-page h1 {
+  margin-bottom: 30px;
+  color: #212529;
+}
+
+.donation-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.donation-nav-item {
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #495057;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.donation-nav-item:hover {
+  background-color: #e9ecef;
+}
+
+.donation-nav-item.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.donation-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .donation-page {
+    padding: 0 15px;
+  }
+
+  .donation-page h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .donation-nav {
+    gap: 8px;
+  }
+
+  .donation-nav-item {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .donation-content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .donation-nav {
+    flex-direction: column;
+  }
+
+  .donation-nav-item {
+    text-align: center;
+  }
+}
