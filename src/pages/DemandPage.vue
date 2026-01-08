@@ -1,5 +1,6 @@
 <template>
   <div class="demand-page">
+    <h1>灾区需求管理</h1>
     <div class="demand-nav">
       <router-link to="/demand/create" class="nav-item" :class="{ active: $route.path === '/demand/create' }">发布需求</router-link>
       <router-link to="/demand/list" class="nav-item" :class="{ active: $route.path === '/demand/list' }">我的需求</router-link>

@@ -31,6 +31,12 @@
         <li class="nav-item">
           <router-link to="/admin" class="nav-link" active-class="active">管理后台</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/student" class="nav-link" active-class="active">学生管理</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link" active-class="active">登录</router-link>
+        </li>
       </ul>
     </div>
   </nav>

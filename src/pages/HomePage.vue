@@ -87,5 +87,41 @@ export default {
 </script>
 
 <style scoped>
-/* 可以在这里添加组件特定的样式，如果有的话 */
+.hero-buttons {
+  margin-top: 30px;
+}
+
+/* 确保按钮样式正确应用 */
+.hero-buttons .btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.hero-buttons .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.hero-buttons .btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.hero-buttons .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.hero-buttons .btn-secondary:hover {
+  background-color: #545b62;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
 </style>

@@ -19,6 +19,10 @@ const LogisticsDetail = () => import('../pages/LogisticsDetail.vue')
 const UserCenterPage = () => import('../pages/UserCenterPage.vue')
 const AdminPage = () => import('../pages/AdminPage.vue')
 const AIAnalysisPage = () => import('../pages/AIAnalysisPage.vue')
+// 添加登录、注册和学生管理页面
+const LoginPage = () => import('../pages/LoginPage.vue')
+const RegisterPage = () => import('../pages/RegisterPage.vue')
+const StudentPage = () => import('../pages/StudentPage.vue')
 
 const routes = [
   {
@@ -118,6 +122,22 @@ const routes = [
     path: '/ai-analysis',
     name: 'AIAnalysisPage',
     component: AIAnalysisPage
+  },
+  // 添加登录、注册和学生管理页面路由
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage
+  },
+  {
+    path: '/register',
+    name: 'RegisterPage',
+    component: RegisterPage
+  },
+  {
+    path: '/student',
+    name: 'StudentPage',
+    component: StudentPage
   }
 ]
 
