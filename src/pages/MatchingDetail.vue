@@ -169,6 +169,37 @@
       </div>
     </div>
   </div>
+  
+  <!-- 取消匹配原因弹窗 -->
+  <div v-if="showCancelReasonModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>取消匹配原因</h3>
+        <button @click="showCancelReasonModal = false" class="close-btn">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="reason-options">
+          <label class="radio-label">
+            <input type="radio" v-model="cancelReason" value="物资信息错误"> 物资信息错误
+          </label>
+          <label class="radio-label">
+            <input type="radio" v-model="cancelReason" value="需求已变更"> 需求已变更
+          </label>
+          <label class="radio-label">
+            <input type="radio" v-model="cancelReason" value="匹配精度不足"> 匹配精度不足
+          </label>
+          <label class="radio-label">
+            <input type="radio" v-model="cancelReason" value="其他原因"> 其他原因
+          </label>
+          <textarea v-if="cancelReason === '其他原因'" v-model="otherReason" class="other-reason-input" placeholder="请输入其他原因..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button @click="showCancelReasonModal = false" class="btn btn-secondary">取消</button>
+        <button @click="confirmCancelWithReason()" class="btn btn-warning">确认提交</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -225,7 +256,11 @@ export default {
         pending: '待确认',
         confirmed: '已确认',
         cancelled: '已取消'
-      }
+      },
+      // 取消匹配原因弹窗相关
+      showCancelReasonModal: false,
+      cancelReason: '',
+      otherReason: ''
     }
   },
   mounted() {
@@ -243,11 +278,27 @@ export default {
       }
     },
     cancelMatching() {
-      if (confirm('确定要取消该匹配吗？取消后将无法恢复。')) {
-        this.matchingDetail.status = 'cancelled';
-        delete this.matchingDetail.logisticsInfo;
-        alert('匹配已取消');
+      this.showCancelReasonModal = true; // 显示原因弹窗，替代原confirm
+    },
+    confirmCancelWithReason() {
+      if (!this.cancelReason) {
+        alert('请选择取消匹配的原因');
+        return;
       }
+      const finalReason = this.cancelReason === '其他原因' ? this.otherReason : this.cancelReason;
+      if (this.cancelReason === '其他原因' && !this.otherReason) {
+        alert('请输入其他原因的具体内容');
+        return;
+      }
+      // 模拟提交原因到后端
+      console.log('取消匹配原因:', finalReason);
+      this.matchingDetail.status = 'cancelled';
+      delete this.matchingDetail.logisticsInfo;
+      alert('匹配已取消，原因：' + finalReason);
+      // 重置表单和弹窗
+      this.showCancelReasonModal = false;
+      this.cancelReason = '';
+      this.otherReason = '';
     }
   }
 }
@@ -503,5 +554,119 @@ export default {
 
 .btn-warning:hover {
   background-color: #e0a800;
+}
+
+/* 弹窗样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.reason-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.radio-label:hover {
+  background-color: #f5f5f5;
+}
+
+.radio-label input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.other-reason-input {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 80px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.other-reason-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.modal-footer {
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 </style>

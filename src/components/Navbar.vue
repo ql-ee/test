@@ -22,18 +22,16 @@
         <li class="nav-item">
           <router-link to="/logistics/list" class="nav-link" active-class="active">物流跟踪</router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link to="/ai-analysis" class="nav-link" active-class="active">AI分析</router-link>
-        </li>
+        </li> -->
         <li class="nav-item">
           <router-link to="/user" class="nav-link" active-class="active">个人中心</router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link to="/admin" class="nav-link" active-class="active">管理后台</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/student" class="nav-link" active-class="active">学生管理</router-link>
-        </li>
+        </li> -->
+        
         <li class="nav-item">
           <router-link to="/login" class="nav-link" active-class="active">登录</router-link>
         </li>

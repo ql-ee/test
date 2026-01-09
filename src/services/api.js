@@ -67,32 +67,7 @@ export const register = async (account, password, verificationCode = '') => {
   });
 };
 
-// 获取学生列表接口
-export const getStudentList = async ({ page = 1, size = 10, sortField = '', sortOrder = '' } = {}) => {
-  return apiClient.get('/students', {
-    params: {
-      page,
-      size,
-      sortField,
-      sortOrder
-    }
-  });
-};
 
-// 添加学生接口
-export const addStudent = async (studentData) => {
-  return apiClient.post('/students', studentData);
-};
-
-// 编辑学生接口
-export const updateStudent = async (id, studentData) => {
-  return apiClient.put(`/students/${id}`, studentData);
-};
-
-// 删除学生接口
-export const deleteStudent = async (id) => {
-  return apiClient.delete(`/students/${id}`);
-};
 
 // 退出登录接口
 export const logout = async () => {

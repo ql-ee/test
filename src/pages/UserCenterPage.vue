@@ -8,7 +8,8 @@
         <div class="card-body">
           <div class="user-info-section">
             <h3>基本信息</h3>
-            <div class="user-info">
+            <!-- 普通信息展示模式 -->
+            <div v-if="!isEditing" class="user-info">
               <div class="info-item">
                 <label>用户名：</label>
                 <span>{{ userInfo.username }}</span>
@@ -25,20 +26,48 @@
                 <label>邮箱：</label>
                 <span>{{ userInfo.email }}</span>
               </div>
-              <div class="info-item">
-                <label>用户角色：</label>
-                <span :class="['role-badge', userInfo.role]">
-                  {{ roleMap[userInfo.role] }}
-                </span>
-              </div>
+
               <div class="info-item">
                 <label>注册时间：</label>
                 <span>{{ userInfo.registerTime }}</span>
               </div>
             </div>
+            
+            <!-- 编辑模式表单 -->
+            <div v-else class="edit-form">
+              <div class="info-item">
+                <label>用户名：</label>
+                <input type="text" v-model="editForm.username" class="form-input">
+              </div>
+              <div class="info-item">
+                <label>真实姓名：</label>
+                <input type="text" v-model="editForm.realName" class="form-input">
+              </div>
+              <div class="info-item">
+                <label>联系方式：</label>
+                <input type="tel" v-model="editForm.phone" class="form-input">
+              </div>
+              <div class="info-item">
+                <label>邮箱：</label>
+                <input type="email" v-model="editForm.email" class="form-input">
+              </div>
+              
+              <div class="info-item">
+                <label>注册时间：</label>
+                <span>{{ userInfo.registerTime }}</span>
+              </div>
+            </div>
+            
+            <!-- 操作按钮 -->
             <div class="action-buttons">
-              <button class="btn btn-primary">编辑信息</button>
-              <button class="btn btn-secondary">修改密码</button>
+              <div v-if="!isEditing">
+                <button class="btn btn-primary" @click="startEdit">编辑信息</button>
+                <button class="btn btn-secondary" @click="changePassword">修改密码</button>
+              </div>
+              <div v-else>
+                <button class="btn btn-primary" @click="saveEdit">保存</button>
+                <button class="btn btn-secondary" @click="cancelEdit">取消</button>
+              </div>
             </div>
           </div>
 
@@ -200,9 +229,12 @@ export default {
         realName: '张爱心',
         phone: '13800138000',
         email: 'love@example.com',
-        role: 'donor',
         registerTime: '2024-01-15 10:30'
       },
+      // 编辑信息相关
+      isEditing: false,
+      editForm: {},
+      originalUserInfo: {},
       userDonations: [
         {
           id: 1001,
@@ -249,11 +281,7 @@ export default {
         { label: '我的需求', value: 'demands' },
         { label: '我的匹配', value: 'matchings' }
       ],
-      roleMap: {
-        donor: '捐赠者',
-        demander: '需求方',
-        admin: '管理员'
-      },
+
       statusMap: {
         pending: '待审核',
         approved: '已审核',
@@ -280,6 +308,48 @@ export default {
       if (degree >= 90) return 'high';
       if (degree >= 70) return 'medium';
       return 'low';
+    },
+    // 编辑信息相关方法
+    startEdit() {
+      this.isEditing = true;
+      // 复制当前用户信息到编辑表单
+      this.editForm = JSON.parse(JSON.stringify(this.userInfo));
+      // 保存原始信息以便取消编辑时恢复
+      this.originalUserInfo = JSON.parse(JSON.stringify(this.userInfo));
+    },
+    saveEdit() {
+      // 验证表单数据
+      if (!this.editForm.username || !this.editForm.realName || !this.editForm.phone || !this.editForm.email) {
+        alert('请填写所有必填字段');
+        return;
+      }
+      
+      // 简单的邮箱格式验证
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.editForm.email)) {
+        alert('请输入有效的邮箱地址');
+        return;
+      }
+      
+      // 简单的手机号格式验证
+      const phoneRegex = /^1[3-9]\d{9}$/;
+      if (!phoneRegex.test(this.editForm.phone)) {
+        alert('请输入有效的手机号码');
+        return;
+      }
+      
+      // 保存编辑后的信息
+      this.userInfo = JSON.parse(JSON.stringify(this.editForm));
+      this.isEditing = false;
+      alert('信息编辑成功');
+    },
+    cancelEdit() {
+      // 恢复原始信息并退出编辑模式
+      this.userInfo = JSON.parse(JSON.stringify(this.originalUserInfo));
+      this.isEditing = false;
+    },
+    changePassword() {
+      alert('修改密码功能将在后续版本中实现');
     }
   }
 }
@@ -355,6 +425,29 @@ export default {
 .info-item span {
   color: #333;
   font-size: 16px;
+}
+
+.form-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 250px;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.edit-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  margin-bottom: 15px;
 }
 
 .action-buttons {
@@ -504,28 +597,7 @@ export default {
   color: #721c24;
 }
 
-.role-badge {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  display: inline-block;
-}
 
-.role-badge.donor {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.role-badge.demander {
-  background-color: #cce7ff;
-  color: #0056b3;
-}
-
-.role-badge.admin {
-  background-color: #fff3cd;
-  color: #856404;
-}
 
 .match-degree {
   padding: 4px 8px;
