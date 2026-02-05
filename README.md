@@ -129,10 +129,3 @@ npm run preview
 ## 许可证
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
-
-## 联系方式
-
-如有问题或建议，请通过以下方式联系我们：
-
-- 项目地址: [https://github.com/yourusername/relief-material-distribution](https://github.com/yourusername/relief-material-distribution)
-- 邮箱: your.email@example.com
